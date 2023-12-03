@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="//cdn.tailwindcss.com"></script>
+		<style>
+			* {
+				transition-duration: 0.5s !important;
+			}
+		</style>
+	</head>
+	<body class="overflow-x-hidden h-screen">
+		<nav
+			class="z-50 fixed left-0 w-screen top-0 px-5 py-3 flex font-serif justify-evenly bg-indigo-950 text-indigo-50 text-2xl italic"
+		>
+			<a class="hover:font-semibold hover:underline" href="/">Home</a>
+			<a class="hover:font-semibold hover:underline" href="/login/"
+				>Login</a
+			>
+			<a
+				class="hover:font-semibold hover:underline"
+				href="/student_signup/"
+				>Student Sign-Up</a
+			>
+			<a
+				class="hover:font-semibold hover:underline"
+				href="/teacher_signup/"
+				>Teacher Sign-Up</a
+			>
+			<a
+				class="hover:font-semibold hover:underline"
+				href="/student_settings/"
+				>Student Settings</a
+			>
+			<a
+				class="hover:font-semibold hover:underline"
+				href="/teacher_settings/"
+				>Teacher Settings</a
+			>
+			<a class="hover:font-semibold hover:underline" href="/logout/"
+				>Logout</a
+			>
+			<a class="hover:font-semibold hover:underline" href="/dashboard/"
+				>Dashboard</a
+			>
+		</nav>
+		{% block content %} {% endblock %}
+	</body>
+</html>

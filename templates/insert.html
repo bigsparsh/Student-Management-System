@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block content %}
+<div class="container h-screen w-screen grid place-items-center">
+	<form action="" method="POST" class="flex flex-col gap-2">
+		{% csrf_token %}
+		<input
+			type="text"
+			name="subject1"
+			id="subject1"
+			class="rounded-md border border-black px-2 py-1 text-lg"
+			required
+		/>
+		<input
+			type="text"
+			name="subject2"
+			id="subject2"
+			class="rounded-md border border-black px-2 py-1 text-lg"
+			required
+		/>
+		<input
+			type="text"
+			name="subject3"
+			id="subject3"
+			class="rounded-md border border-black px-2 py-1 text-lg"
+			required
+		/>
+		<input
+			type="text"
+			name="subject4"
+			id="subject4"
+			class="rounded-md border border-black px-2 py-1 text-lg"
+			required
+		/>
+		<input
+			type="text"
+			name="subject5"
+			id="subject5"
+			class="rounded-md border border-black px-2 py-1 text-lg"
+			required
+		/>
+		<select
+			name="course"
+			id="course"
+			class="rounded-md border border-black px-2 py-1 text-lg"
+		>
+			{% for opt in courses %}
+			<option value="{{opt}}">{{opt}}</option>
+			{% endfor %}
+		</select>
+		<input
+			type="submit"
+			value="SUBMIT!"
+			class="rounded-md bg-black px-2 py-1 text-lg text-white font-bold"
+		/>
+	</form>
+</div>
+
+{% endblock %}
