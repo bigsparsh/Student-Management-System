@@ -44,13 +44,13 @@ class Subjects(models.Model):
 
 class TimeTables(models.Model):
     day_choices = (
-        ("SUN", "Sunday"),
-        ("MON", "Monday"),
-        ("TUE", "Tuesday"),
-        ("WED", "Wednesday"),
-        ("THU", "Thursday"),
-        ("FRI", "Friday"),
-        ("SAT", "Saturday"),
+        ("Sunday", "Sunday"),
+        ("Monday", "Monday"),
+        ("Tuesday", "Tuesday"),
+        ("Wednesday", "Wednesday"),
+        ("Thursday", "Thursday"),
+        ("Friday", "Friday"),
+        ("Saturday", "Saturday"),
     )
 
     course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
@@ -60,7 +60,9 @@ class TimeTables(models.Model):
     day = models.CharField(max_length=30, choices=day_choices, default="Sunday")
     room_no = models.IntegerField(default=0)
     type_of_class = models.CharField(
-        max_length=10, choices=(("LEC", "Lecture"), ("LAB", "Lab")), default="Lecture"
+        max_length=10,
+        choices=(("Lecture", "Lecture"), ("Lab", "Lab")),
+        default="Lecture",
     )
 
     def __str__(self):
@@ -114,5 +116,5 @@ class Attendance(models.Model):
 
     def __str__(self):
         return "{} has {}% attendance in {}".format(
-            self.student_id.student_name, self.percentage, self.subject_id.subject_name
+            self.student_id.user.username, self.percentage, self.subject_id.subject_name
         )

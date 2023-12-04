@@ -66,6 +66,14 @@ def student_signup(request):
                     dob=dob,
                     course=Courses.objects.filter(course_name=course).first(),
                 )
+                course_subjects = Subjects.objects.filter(
+                    course_id=Courses.objects.filter(course_name=course).first()
+                )
+                for subject in course_subjects:
+                    new_attendance = Attendance.objects.create(
+                        subject_id=subject, student_id=new_profile, percentage=0
+                    )
+                    new_attendance.save()
                 new_profile.save()
                 return redirect("student_settings")
         else:
@@ -79,7 +87,31 @@ def student_signup(request):
 
 @login_required(login_url="login")
 def dashboard(request):
-    return render(request, "dashboard.html")
+    student = Students.objects.filter(user=request.user).first()
+    subjects = Subjects.objects.filter(course_id=student.course)
+    attendance = Attendance.objects.filter(student_id=student)
+    current_day = datetime.now().strftime("%A")
+    print(student.course.course_name)
+    today_time_table = TimeTables.objects.filter(
+        course_id=student.course, day=current_day
+    )
+    att_list_angle = []
+    att_list = []
+    for subject in subjects:
+        for att in attendance:
+            if subject == att.subject_id:
+                att_list_angle.append((att.percentage * 360) / 100)
+                att_list.append(att.percentage)
+    return render(
+        request,
+        "dashboard.html",
+        {
+            "user_profile": student,
+            "subject_attendance": zip(subjects, att_list_angle, att_list),
+            "time_table": today_time_table,
+            "subjects": subject,
+        },
+    )
 
 
 def teacher_signup(request):

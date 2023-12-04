@@ -37,7 +37,7 @@
 				class="profile py-2 rounded-xl flex justify-center gap-3 items-center mx-5 my-5 bg-indigo-50"
 			>
 				<img
-					src="//picsum.photos/500"
+					src="{{user_profile.profile_img.url}}"
 					width="60"
 					height="60"
 					class="rounded-xl shadow"
@@ -45,11 +45,11 @@
 				<h1
 					class="text-3xl font-serif font-medium tracking-tighter text-indigo-950"
 				>
-					Sparsh Singh
+					{{user_profile.user.username}}
 					<span
 						class="block text-sm tracking-normal font-sans bg-indigo-50 text-indigo-800"
 					>
-						Diploma CS</span
+						{{user_profile.course.course_name}} </span
 					>
 				</h1>
 			</div>
@@ -162,160 +162,59 @@
 		</nav>
 		<div class="right-sec h-full flex-1">
 			<div
-				class="bg-indigo-950/80 backdrop-blur-sm rounded-3xl w-full h-full border border-indigo-50/50 flex flex-col text-indigo-50"
+				class="bg-indigo-50 backdrop-blur-sm rounded-3xl w-full h-full flex flex-col text-indigo-50"
 			>
 				<div class="sec-1 w-full">
 					<h1
-						class="text-4xl font-light font-serif tracking-tighter text-indigo-950 my-7 px-10 py-1 w-full bg-gradient-to-r from-indigo-50 via-indigo-50 to-transparent"
+						class="text-4xl font-light font-serif tracking-tighter text-indigo-50 my-7 px-10 py-1 w-full bg-gradient-to-r from-indigo-950 via-indigo-950 to-transparent"
 					>
 						Attendance
 					</h1>
 					<div class="tabs flex h-fit w-full gap-5 px-10">
-						<div
-							class="tile-1 gap-3 grid grid-rows-4 flex-1 bg-indigo-50 rounded-3xl text-indigo-950 p-5 tracking-tighter"
+						
+						{% for subject, att_ang, att in subject_attendance %}
+							<div
+							class="tile-1 gap-3 grid grid-rows-4 flex-1 bg-white drop-shadow-xl rounded-3xl text-indigo-950 p-5 tracking-tighter"
 						>
 							<h1
 								class="text-xl leading-5 row-span-1 font-medium"
 							>
-								Mathematical Engineering
+								{{subject.subject_name}}
 								<span class="text-sm float-right"
 									><b>12/67</b></span
 								>
 							</h1>
 							<div
-								class="circle grow rounded-3xl row-span-3 aspect-square grid place-items-center p-5 border border-indigo-950"
+								class="circle grow rounded-3xl row-span-3 aspect-square grid place-items-center p-5 "
 								style="
 									background: conic-gradient(
-										#1e1b4b 25deg,
-										white 26deg
+										#1e1b4b {{att_ang}}deg,
+										#1e1b4b50 {{att_ang}}deg
 									);
 								"
 							>
 								<h1
-									class="num h-full w-full bg-indigo-50 rounded-2xl border border-indigo-950 text-6xl font-black flex justify-center items-center"
+									class="num h-full w-full bg-white rounded-2xl text-6xl font-black flex justify-center items-center"
 								>
-									15<span class="text-xs inline">%</span>
+									{{att}}<span class="text-xs inline">%</span>
 								</h1>
 							</div>
 						</div>
-						<div
-							class="tile-1 gap-3 grid grid-rows-4 flex-1 bg-indigo-50 rounded-3xl text-indigo-950 p-5 tracking-tighter"
-						>
-							<h1
-								class="text-xl leading-5 row-span-1 font-medium"
-							>
-								Computer Science Engineering
-								<span class="text-sm float-right"
-									><b>21/32</b></span
-								>
-							</h1>
-							<div
-								class="circle grow rounded-3xl row-span-3 aspect-square grid place-items-center p-5 border border-indigo-950"
-								style="
-									background: conic-gradient(
-										#1e1b4b 335deg,
-										white 336deg
-									);
-								"
-							>
-								<h1
-									class="num h-full w-full bg-indigo-50 rounded-2xl border border-indigo-950 text-6xl font-black flex justify-center items-center"
-								>
-									92<span class="text-xs inline">%</span>
-								</h1>
-							</div>
-						</div>
-						<div
-							class="tile-1 gap-3 grid grid-rows-4 flex-1 bg-indigo-50 rounded-3xl text-indigo-950 p-5 tracking-tighter"
-						>
-							<h1
-								class="text-xl leading-5 row-span-1 font-medium"
-							>
-								Theoretical Physics
-								<span class="text-sm float-right"
-									><b>114/22</b></span
-								>
-							</h1>
-							<div
-								class="circle grow rounded-3xl row-span-3 aspect-square grid place-items-center p-5 border border-indigo-950"
-								style="
-									background: conic-gradient(
-										#1e1b4b 120deg,
-										white 121deg
-									);
-								"
-							>
-								<h1
-									class="num h-full w-full bg-indigo-50 rounded-2xl border border-indigo-950 text-6xl font-black flex justify-center items-center"
-								>
-									39<span class="text-xs inline">%</span>
-								</h1>
-							</div>
-						</div>
-						<div
-							class="tile-1 gap-3 grid grid-rows-4 flex-1 bg-indigo-50 rounded-3xl text-indigo-950 p-5 tracking-tighter"
-						>
-							<h1
-								class="text-xl leading-5 row-span-1 font-medium"
-							>
-								Game level desgining
-								<span class="text-sm float-right"
-									><b>12/67</b></span
-								>
-							</h1>
-							<div
-								class="circle grow rounded-3xl row-span-3 aspect-square grid place-items-center p-5 border border-indigo-950"
-								style="
-									background: conic-gradient(
-										#1e1b4b 200deg,
-										white 201deg
-									);
-								"
-							>
-								<h1
-									class="num h-full w-full bg-indigo-50 rounded-2xl border border-indigo-950 text-6xl font-black flex justify-center items-center"
-								>
-									52<span class="text-xs inline">%</span>
-								</h1>
-							</div>
-						</div>
-						<div
-							class="tile-1 gap-3 grid grid-rows-4 flex-1 bg-indigo-50 rounded-3xl text-indigo-950 p-5 tracking-tighter"
-						>
-							<h1
-								class="text-xl leading-5 row-span-1 font-medium"
-							>
-								Astronomy
-								<span class="text-sm float-right"
-									><b>68/27</b></span
-								>
-							</h1>
-							<div
-								class="circle grow rounded-3xl row-span-3 aspect-square grid place-items-center p-5 border border-indigo-950"
-								style="
-									background: conic-gradient(
-										#1e1b4b 290deg,
-										white 290deg
-									);
-								"
-							>
-								<h1
-									class="num h-full w-full bg-indigo-50 rounded-2xl border border-indigo-950 text-6xl font-black flex justify-center items-center"
-								>
-									79<span class="text-xs inline">%</span>
-								</h1>
-							</div>
-						</div>
+						{% empty %}
+							<h1 class="text-3xl text-green-500 text-center my-10 py-2 rounded-xl shadow-xl bg-white w-full italic"> You're new, you don't have an attendance record </h1>
+						{% endfor %}
+
 					</div>
 				</div>
 				<div class="sec-2 w-full overflow-hidden">
 					<h1
-						class="text-4xl font-light font-serif tracking-tighter text-indigo-950 my-7 px-10 py-1 w-full bg-gradient-to-r from-indigo-50 via-indigo-50 to-transparent"
+						class="text-4xl font-light font-serif tracking-tighter text-indigo-50 my-7 px-10 py-1 w-full bg-gradient-to-r from-indigo-950 via-indigo-950 to-transparent"
 					>
-						Today's Time Table
+						Today's Time Table {{now_time}}
 					</h1>
-					<div class="table w-full rounded-3xl  px-10 ">
-						<div class="headings flex justify-evenly w-full bg-indigo-50 text-indigo-950 rounded-t-3xl">
+					<div class="table w-full rounded-3xl px-10">
+						<div class="cont w-full h-full shadow-xl rounded-3xl">
+							<div class="headings flex justify-evenly w-full bg-white text-indigo-950 rounded-t-3xl">
 							<h1 class="font-serif text-xl font-semibold border-b border-indigo-800 w-full text-center py-2">
 								Subject
 							</h1>
@@ -329,50 +228,20 @@
 								Type
 							</h1>
 						</div>
-						<div class="entries rounded-b-3xl overflow-y-scroll h-32 font-medium">
-							<div class="entry-1 flex justify-evenly w-full text-md bg-indigo-50 text-indigo-950 py-2">
-								<p class="text-center w-full">Mathematics</p>
-								<p class="text-center w-full">10 AM to 11 AM</p>
-								<p class="text-center w-full">104 C</p>
-								<p class="text-center w-full">Lecture</p>
+						<div class="entries rounded-b-3xl overflow-y-scroll h-32 font-medium bg-white">
+						
+							{% for now in time_table %}
+							<div class="entry-1 flex justify-evenly w-full text-md text-indigo-950 py-2">
+								<p class="text-center w-full">{{now.subject_id.subject_name}}</p>
+								<p class="text-center w-full">{{now.time_start}} <b>to</b> <br> {{now.time_end}}</p>
+								<p class="text-center w-full">{{now.room_no}}</p>
+								<p class="text-center w-full">{{now.type_of_class}}</p>
 							</div>
-							<div class="entry-1 flex justify-evenly w-full text-md bg-indigo-50 text-indigo-950 py-2">
-								<p class="text-center w-full">English</p>
-								<p class="text-center w-full">12 PM to 1 PM</p>
-								<p class="text-center w-full">104 C</p>
-								<p class="text-center w-full">Lecture</p>
-							</div>
-							<div class="entry-1 flex justify-evenly w-full text-md bg-indigo-50 text-indigo-950 py-2">
-								<p class="text-center w-full">Physics</p>
-								<p class="text-center w-full">12 PM to 1 PM</p>
-								<p class="text-center w-full">104 C</p>
-								<p class="text-center w-full">Lecture</p>
-							</div>
-							<div class="entry-1 flex justify-evenly w-full text-md bg-indigo-50 text-indigo-950 py-2">
-								<p class="text-center w-full">Physics</p>
-								<p class="text-center w-full">12 PM to 1 PM</p>
-								<p class="text-center w-full">104 C</p>
-								<p class="text-center w-full">Lecture</p>
-							</div>
-							<div class="entry-1 flex justify-evenly w-full text-md bg-indigo-50 text-indigo-950 py-2">
-								<p class="text-center w-full">Physics</p>
-								<p class="text-center w-full">12 PM to 1 PM</p>
-								<p class="text-center w-full">104 C</p>
-								<p class="text-center w-full">Lecture</p>
-							</div>
-							<div class="entry-1 flex justify-evenly w-full text-md bg-indigo-50 text-indigo-950 py-2">
-								<p class="text-center w-full">Physics</p>
-								<p class="text-center w-full">12 PM to 1 PM</p>
-								<p class="text-center w-full">104 C</p>
-								<p class="text-center w-full">Lecture</p>
-							</div>
-							<div class="entry-1 flex justify-evenly w-full text-md bg-indigo-50 text-indigo-950 py-2">
-								<p class="text-center w-full">Physics</p>
-								<p class="text-center w-full">12 PM to 1 PM</p>
-								<p class="text-center w-full">104 C</p>
-								<p class="text-center w-full">Lecture</p>
-							</div>
+							{% empty %}
+							<h1 class="text-3xl text-green-500 text-center py-10 w-full italic">No Classes today :)</h1>
+							{% endfor %}
 							
+						</div>
 						</div>
 					</div>
 			</div>
