@@ -71,7 +71,7 @@ def student_signup(request):
                 )
                 for subject in course_subjects:
                     new_attendance = Attendance.objects.create(
-                        subject_id=subject, student_id=new_profile, percentage=0
+                        subject_id=subject, student_id=new_profile
                     )
                     new_attendance.save()
                 new_profile.save()
@@ -107,7 +107,7 @@ def dashboard(request):
         "dashboard.html",
         {
             "user_profile": student,
-            "subject_attendance": zip(subjects, att_list_angle, att_list),
+            "subject_attendance": zip(subjects, att_list_angle, att_list, attendance),
             "time_table": today_time_table,
             "subjects": subject,
         },

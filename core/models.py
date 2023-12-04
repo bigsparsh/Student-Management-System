@@ -112,7 +112,13 @@ class Notifications(models.Model):
 class Attendance(models.Model):
     subject_id = models.ForeignKey(Subjects, on_delete=models.CASCADE)
     student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
-    percentage = models.IntegerField()
+    total_class = models.IntegerField(default=0)
+    class_taken = models.IntegerField(default=0)
+    # percentage = models.IntegerField(default=0)
+
+    @property
+    def percentage(self):
+        return round((self.class_taken * 100) / self.total_class, 1)
 
     def __str__(self):
         return "{} has {}% attendance in {}".format(

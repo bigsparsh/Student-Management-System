@@ -183,7 +183,7 @@
 					</h1>
 					<div class="tabs flex h-fit w-full gap-5 px-10">
 						
-						{% for subject, att_ang, att in subject_attendance %}
+						{% for subject, att_ang, att, attendance in subject_attendance %}
 							<div
 							class="tile-1 gap-3 grid grid-rows-4 flex-1 bg-white drop-shadow-xl rounded-3xl text-indigo-950 p-5 tracking-tighter"
 						>
@@ -192,7 +192,7 @@
 							>
 								{{subject.subject_name}}
 								<span class="text-sm float-right"
-									><b>12/67</b></span
+									><b>{{attendance.class_taken}}/{{attendance.total_class}}</b></span
 								>
 							</h1>
 							<div
@@ -205,7 +205,7 @@
 								"
 							>
 								<h1
-									class="num h-full w-full bg-white rounded-2xl text-6xl font-black flex justify-center items-center"
+									class="num h-full w-full bg-white rounded-2xl text-4xl font-black flex justify-center items-center"
 								>
 									{{att}}<span class="text-xs inline">%</span>
 								</h1>
