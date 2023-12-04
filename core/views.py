@@ -252,3 +252,37 @@ def insert(request):
         "insert.html",
         {"courses": Courses.objects.values_list("course_name", flat=True)},
     )
+
+
+def timetable_inserter(request):
+    subjects = Subjects.objects.values_list("subject_name", flat=True)
+    if request.method == "POST":
+        course = request.POST["course"]
+        day = request.POST["day"]
+        time_table_list = []
+        current_course = Courses.objects.filter(course_name=course).first()
+        _10t11 = request.POST["10t11"]
+        _11t12 = request.POST["11t12"]
+        _12t1 = request.POST["12t1"]
+        _1t2 = request.POST["1t2"]
+        _3t4 = request.POST["3t4"]
+        _4t5 = request.POST["4t5"]
+        _5t6 = request.POST["5t6"]
+        time_table_list = [_10t11, _11t12, _12t1, _1t2, _3t4, _4t5, _5t6]
+        time_shift = [[10, 11], [11, 12], [12, 1], [1, 2], [3, 4], [4, 5], [5, 6]]
+        if time_table_list[0] is not None:
+            for i, time in enumerate(time_table_list):
+                tt = TimeTables.objects.create(
+                    day=day,
+                    course_id=current_course,
+                    subject_id=Subjects.objects.filter(subject_name=time).first(),
+                    time_start=f"{time_shift[i][0]}:00:00",
+                    time_end=f"{time_shift[i][1]}:00:00",
+                    type_of_class="Lecture",
+                    room_no=random.randint(100, 400),
+                )
+                tt.save()
+    courses = Courses.objects.values_list("course_name", flat=True)
+    return render(
+        request, "timetable_inserter.html", {"courses": courses, "subjects": subjects}
+    )

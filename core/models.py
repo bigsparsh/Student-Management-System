@@ -55,8 +55,8 @@ class TimeTables(models.Model):
 
     course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
     subject_id = models.ForeignKey(Subjects, on_delete=models.CASCADE)
-    time_start = models.DateTimeField()
-    time_end = models.DateTimeField()
+    time_start = models.TimeField()
+    time_end = models.TimeField()
     day = models.CharField(max_length=30, choices=day_choices, default="Sunday")
     room_no = models.IntegerField(default=0)
     type_of_class = models.CharField(

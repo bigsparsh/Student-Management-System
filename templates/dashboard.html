@@ -26,6 +26,17 @@
 						center / 100px 100px;
 				background-color: #0e0b2d;
 			}
+			::-webkit-scrollbar{
+				width: 5px;
+				border-radius: 10px;
+				background-color: white;
+			}
+			::-webkit-scrollbar-thumb{
+				border-radius: 10px;
+				width:10px;
+				background-color: #1e1b4b;
+
+			}
 		</style>
 		<script src="//cdn.tailwindcss.com"></script>
 	</head>
@@ -233,7 +244,7 @@
 							{% for now in time_table %}
 							<div class="entry-1 flex justify-evenly w-full text-md text-indigo-950 py-2">
 								<p class="text-center w-full">{{now.subject_id.subject_name}}</p>
-								<p class="text-center w-full">{{now.time_start}} <b>to</b> <br> {{now.time_end}}</p>
+								<p class="text-center w-full">{{now.time_start}} <b>to</b> {{now.time_end}}</p>
 								<p class="text-center w-full">{{now.room_no}}</p>
 								<p class="text-center w-full">{{now.type_of_class}}</p>
 							</div>

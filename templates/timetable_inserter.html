@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="//cdn.tailwindcss.com"></script>
+	</head>
+	<body>
+		<form action="" method="post">
+			{% csrf_token %}
+			<label for="day">Select Day: </label>
+			<select name="day" id="day" class="border border-black">
+				<option value="Sunday">Sunday</option>
+				<option value="Monday">Monday</option>
+				<option value="Tuesday">Tuesday</option>
+				<option value="Wednesday">Wednesday</option>
+				<option value="Thursday">Thursday</option>
+				<option value="Friday">Friday</option>
+				<option value="Saturday">Saturday</option>
+			</select>
+			<br />
+			<label for="course"> Select Course: </label>
+			<select name="course" id="course" class="border border-black">
+				<option value="None">None</option>
+				{% for course in courses %}
+				<option value="{{course}}">{{course}}</option>
+				{% endfor %}
+			</select>
+			<br />
+
+			<table>
+				<tr>
+					<th class="border border-black">10 to 11</th>
+					<th class="border border-black">11 to 12</th>
+				</tr>
+				<tr>
+					<td>
+						<select name="10t11" id="10t11">
+							<option value="None">None</option>
+							{% for subject in subjects %}
+							<option value="{{subject}}">{{subject}}</option>
+							{% endfor %}
+						</select>
+					</td>
+					<td>
+						<select name="11t12" id="11t12">
+							<option value="None">None</option>
+							{% for subject in subjects %}
+							<option value="{{subject}}">{{subject}}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th class="border border-black">12 to 1</th>
+					<th class="border border-black">1 to 2</th>
+				</tr>
+				<tr>
+					<td>
+						<select name="12t1" id="12t1">
+							<option value="None">None</option>
+							{% for subject in subjects %}
+							<option value="{{subject}}">{{subject}}</option>
+							{% endfor %}
+						</select>
+					</td>
+					<td>
+						<select name="1t2" id="1t2">
+							<option value="None">None</option>
+							{% for subject in subjects %}
+							<option value="{{subject}}">{{subject}}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th class="border border-black">3 to 4</th>
+					<th class="border border-black">4 to 5</th>
+				</tr>
+				<tr>
+					<td>
+						<select name="3t4" id="3t4">
+							<option value="None">None</option>
+							{% for subject in subjects %}
+							<option value="{{subject}}">{{subject}}</option>
+							{% endfor %}
+						</select>
+					</td>
+					<td>
+						<select name="4t5" id="4t5">
+							<option value="None">None</option>
+							{% for subject in subjects %}
+							<option value="{{subject}}">{{subject}}</option>
+							{% endfor %}
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th class="border border-black">5 to 6</th>
+					<th></th>
+				</tr>
+				<tr>
+					<td>
+						<select name="5t6" id="5t6">
+							<option value="None">None</option>
+							{% for subject in subjects %}
+							<option value="{{subject}}">{{subject}}</option>
+							{% endfor %}
+						</select>
+					</td>
+					<td></td>
+				</tr>
+			</table>
+			<input type="submit" value="Insert" />
+		</form>
+	</body>
+</html>

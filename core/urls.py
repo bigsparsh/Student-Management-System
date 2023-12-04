@@ -11,4 +11,5 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
     path("logout/", views.logout, name="logout"),
     path("insert/", views.insert, name="insert"),
+    path("timetable_inserter/", views.timetable_inserter, name="timetable_inserter"),
 ]
