@@ -103,7 +103,7 @@ class Notifications(models.Model):
     def __str__(self):
         return "Message: {}, sent by {} on {} for course {}".format(
             self.message,
-            self.teacher_id.teacher_name,
+            self.teacher_id.teacher_user.username,
             self.date,
             self.course_id.course_name,
         )

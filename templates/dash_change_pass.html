@@ -1,0 +1,48 @@
+{% extends "dash_base.html" %} {% block content %}
+
+<div
+	class="bg-indigo-50 backdrop-blur-sm overflow-y-scroll pb-10 rounded-3xl w-full h-full flex flex-col text-indigo-50"
+>
+	<h1
+		class="text-4xl font-light font-serif tracking-tighter text-indigo-50 my-7 px-10 py-1 w-full bg-gradient-to-r from-indigo-950 via-indigo-950 to-transparent"
+	>
+		Change Password
+	</h1>
+	<div class="sec-2 grow w-full grid place-items-center">
+		<form
+			action=""
+			method="post"
+			class="p-10 rounded-3xl shadow-xl bg-white text-indigo-950 flex flex-col gap-2 w-1/3"
+		>
+			{% csrf_token %}
+			<label
+				for="old_password"
+				class="text-2xl tracking-tighter font-serif"
+				>Enter old password:
+			</label>
+			<input
+				type="password"
+				name="old_password"
+				id="old_password"
+				class="text-indigo-950/70 rounded-md mb-3 bg-indigo-100/10 shadow-inner border-b px-5 py-2 border-indigo-950"
+			/>
+			<label
+				for="new_password"
+				class="text-2xl tracking-tighter font-serif"
+				>Enter new password:
+			</label>
+			<input
+				type="password"
+				name="new_password"
+				id="new_password"
+				class="text-indigo-950/70 rounded-md mb-3 bg-indigo-100/10 shadow-inner border-b px-5 py-2 border-indigo-950"
+			/>
+			<input
+				type="submit"
+				value="Update password"
+				class="tracking-tighter font-medium hover:text-indigo-50 cursor-pointer hover:bg-indigo-950 text-xl px-5 py-2 border-indigo-950 border w-fit self-center rounded-xl"
+			/>
+		</form>
+	</div>
+</div>
+{% endblock content %}

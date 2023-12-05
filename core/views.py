@@ -224,6 +224,7 @@ def logout(request):
     return redirect("login")
 
 
+@login_required(login_url="login")
 def insert(request):
     course_list = Courses.objects.values_list()
     if request.method == "POST":
@@ -253,6 +254,7 @@ def insert(request):
     )
 
 
+@login_required(login_url="login")
 def timetable_inserter(request):
     subjects = Subjects.objects.values_list("subject_name", flat=True)
     if request.method == "POST":
@@ -287,6 +289,7 @@ def timetable_inserter(request):
     )
 
 
+@login_required(login_url="login")
 def dash_personal_info(request):
     student = Students.objects.filter(user=request.user).first()
     subjects = Subjects.objects.filter(course_id=student.course)
@@ -299,6 +302,7 @@ def dash_personal_info(request):
     )
 
 
+@login_required(login_url="login")
 def dash_time_table(request):
     student = Students.objects.filter(user=request.user).first()
     subjects = Subjects.objects.filter(course_id=student.course)
@@ -324,6 +328,7 @@ def dash_time_table(request):
     )
 
 
+@login_required(login_url="login")
 def dash_faculty(request):
     student = Students.objects.filter(user=request.user).first()
     teachers = Teachers.objects.filter(course_id=student.course)
@@ -335,3 +340,33 @@ def dash_faculty(request):
             "teachers": teachers,
         },
     )
+
+
+@login_required(login_url="login")
+def dash_notification(request):
+    student = Students.objects.filter(user=request.user).first()
+    notifications = Notifications.objects.filter(course_id=student.course)
+    return render(
+        request,
+        "dash_notification.html",
+        {
+            "user_profile": student,
+            "notifications": notifications,
+        },
+    )
+
+
+@login_required(login_url="login")
+def dash_change_pass(request):
+    student = Students.objects.filter(user=request.user).first()
+    if request.method == "POST":
+        old_password = request.POST.get("old_password")
+        new_password = request.POST.get("new_password")
+        user = student.user
+        if not user.check_password(old_password):
+            print("Old password is incorrect")
+            return redirect("dash_change_pass")
+        user.set_password(new_password)
+        user.save()
+        return redirect("logout")
+    return render(request, "dash_change_pass.html", {"user_profile": student})

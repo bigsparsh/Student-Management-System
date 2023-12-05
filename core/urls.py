@@ -24,6 +24,16 @@ urlpatterns = [
         views.dash_faculty,
         name="dash_faculty",
     ),
+    path(
+        "dashboard/dash_notification",
+        views.dash_notification,
+        name="dash_notification",
+    ),
+    path(
+        "dashboard/dash_change_pass",
+        views.dash_change_pass,
+        name="dash_change_pass",
+    ),
     path("logout/", views.logout, name="logout"),
     path("insert/", views.insert, name="insert"),
     path("timetable_inserter/", views.timetable_inserter, name="timetable_inserter"),
