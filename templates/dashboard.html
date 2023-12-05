@@ -13,7 +13,9 @@
 			<div
 				class="tile-1 gap-4 grid grid-rows-4 flex-1 bg-white drop-shadow-xl rounded-3xl text-indigo-950 p-5 tracking-tighter"
 			>
-				<h1 class="text-xl leading-5 row-span-1 font-medium flex items-center justify-center text-center">
+				<h1
+					class="text-xl leading-5 row-span-1 font-medium flex items-center justify-center text-center"
+				>
 					{{subject.subject_name}}
 					<span class="text-sm float-right"></span>
 				</h1>
@@ -25,14 +27,16 @@
 										#1e1b4b50 {{att_ang}}deg
 									);
 								"
+					id="{{subject.subject_name}}"
 				>
 					<div
 						class="num h-full w-full bg-white rounded-2xl text-4xl font-black flex flex-col justify-center items-center"
 					>
 						<h1>{{att}}<span class="text-sm inline">%</span></h1>
-						<p class="text-sm font-medium"
-							>{{attendance.class_taken}} / {{attendance.total_class}}</p
-						>
+						<p class="text-sm font-medium">
+							{{attendance.class_taken}} /
+							{{attendance.total_class}}
+						</p>
 					</div>
 				</div>
 			</div>
@@ -109,4 +113,14 @@
 		</div>
 	</div>
 </div>
+<script>
+	console.log("working");
+		{% for subject, att_ang, att, attendance in subject_attendance %}
+		var {{subject.subject_name}} = document.getElementById("{{subject.subject_name}}");
+		window.onload = ()=>{
+			console.log(0);
+		};
+
+		{% endfor %}
+</script>
 {% endblock %}

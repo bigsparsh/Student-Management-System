@@ -21,7 +21,7 @@ class Students(models.Model):
     )
     address = models.CharField(max_length=100, default="")
     phone = models.IntegerField(default=0)
-    course = models.ForeignKey(Courses, on_delete=models.CASCADE, null=True)
+    course_id = models.ForeignKey(Courses, on_delete=models.CASCADE, null=True)
     father_name = models.CharField(max_length=30, default="")
     mother_name = models.CharField(max_length=30, default="")
     father_phone = models.IntegerField(default=0)
@@ -76,7 +76,7 @@ class TimeTables(models.Model):
 
 
 class Teachers(models.Model):
-    teacher_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     teacher_id = models.IntegerField()
     profile_img = models.ImageField(
         upload_to="profile_images", default="blank_profile_picture.jpg", null=True
@@ -88,7 +88,7 @@ class Teachers(models.Model):
 
     def __str__(self):
         return "{} | of course {} teaches {}".format(
-            self.teacher_user.username,
+            self.user.username,
             self.course_id.course_name,
             self.subject_id.subject_name,
         )
@@ -112,9 +112,11 @@ class Notifications(models.Model):
 class Attendance(models.Model):
     subject_id = models.ForeignKey(Subjects, on_delete=models.CASCADE)
     student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
+    teacher_id = models.ForeignKey(Teachers, on_delete=models.CASCADE, null=True)
     total_class = models.IntegerField(default=1)
     class_taken = models.IntegerField(default=0)
-    # percentage = models.IntegerField(default=0)
+    date = models.DateField()
+    time = models.TimeField()
 
     @property
     def percentage(self):

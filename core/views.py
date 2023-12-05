@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import *
 from itertools import chain
+from datetime import time, timedelta, datetime
 import random
 from django.contrib.auth.models import Group, User
 
@@ -64,14 +65,17 @@ def student_signup(request):
                     user=user_model,
                     student_id=Students.objects.latest("student_id").student_id + 1,
                     dob=dob,
-                    course=Courses.objects.filter(course_name=course).first(),
+                    course_id=Courses.objects.filter(course_name=course).first(),
                 )
                 course_subjects = Subjects.objects.filter(
                     course_id=Courses.objects.filter(course_name=course).first()
                 )
                 for subject in course_subjects:
                     new_attendance = Attendance.objects.create(
-                        subject_id=subject, student_id=new_profile
+                        subject_id=subject,
+                        student_id=new_profile,
+                        date=datetime.today().date(),
+                        time=datetime.now().time(),
                     )
                     new_attendance.save()
                 new_profile.save()
@@ -88,11 +92,11 @@ def student_signup(request):
 @login_required(login_url="login")
 def dashboard(request):
     student = Students.objects.filter(user=request.user).first()
-    subjects = Subjects.objects.filter(course_id=student.course)
+    subjects = Subjects.objects.filter(course_id=student.course_id)
     attendance = Attendance.objects.filter(student_id=student)
     current_day = datetime.now().strftime("%A")
     today_time_table = TimeTables.objects.filter(
-        course_id=student.course, day=current_day
+        course_id=student.course_id, day=current_day
     )
     att_list_angle = []
     att_list = []
@@ -142,7 +146,7 @@ def teacher_signup(request):
 
                 user_model = User.objects.get(username=username)
                 new_profile = Teachers.objects.create(
-                    teacher_user=user_model,
+                    user=user_model,
                     teacher_id=Teachers.objects.latest("teacher_id").teacher_id + 1,
                     course_id=current_course,
                 )
@@ -159,7 +163,7 @@ def teacher_signup(request):
 
 @login_required(login_url="login")
 def teacher_settings(request):
-    user_profile = Teachers.objects.get(teacher_user=request.user)
+    user_profile = Teachers.objects.get(user=request.user)
     subjects = Subjects.objects.filter(course_id=user_profile.course_id)
 
     if request.method == "POST":
@@ -270,7 +274,15 @@ def timetable_inserter(request):
         _4t5 = request.POST["4t5"]
         _5t6 = request.POST["5t6"]
         time_table_list = [_10t11, _11t12, _12t1, _1t2, _3t4, _4t5, _5t6]
-        time_shift = [[10, 11], [11, 12], [12, 1], [1, 2], [3, 4], [4, 5], [5, 6]]
+        time_shift = [
+            [10, 11],
+            [11, 12],
+            [12, 13],
+            [13, 14],
+            [15, 16],
+            [16, 17],
+            [17, 18],
+        ]
         if time_table_list[0] is not None:
             for i, time in enumerate(time_table_list):
                 tt = TimeTables.objects.create(
@@ -292,7 +304,7 @@ def timetable_inserter(request):
 @login_required(login_url="login")
 def dash_personal_info(request):
     student = Students.objects.filter(user=request.user).first()
-    subjects = Subjects.objects.filter(course_id=student.course)
+    subjects = Subjects.objects.filter(course_id=student.course_id)
     # attendance = Attendance.objects.filter(student_id=student)
     # current_day = datetime.now().strftime("%A")
     return render(
@@ -305,8 +317,10 @@ def dash_personal_info(request):
 @login_required(login_url="login")
 def dash_time_table(request):
     student = Students.objects.filter(user=request.user).first()
-    subjects = Subjects.objects.filter(course_id=student.course)
+    subjects = Subjects.objects.filter(course_id=student.course_id)
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    current_day = datetime.now().strftime("%A")
+
     day_wize_timetable = {
         "Monday": [],
         "Tuesday": [],
@@ -315,7 +329,7 @@ def dash_time_table(request):
         "Friday": [],
     }
     for day in days:
-        for time in TimeTables.objects.filter(course_id=student.course, day=day):
+        for time in TimeTables.objects.filter(course_id=student.course_id, day=day):
             day_wize_timetable[day].append(time)
     return render(
         request,
@@ -324,6 +338,7 @@ def dash_time_table(request):
             "user_profile": student,
             "subjects": subjects,
             "day_wize_timetable": day_wize_timetable,
+            "current_day": current_day,
         },
     )
 
@@ -331,7 +346,7 @@ def dash_time_table(request):
 @login_required(login_url="login")
 def dash_faculty(request):
     student = Students.objects.filter(user=request.user).first()
-    teachers = Teachers.objects.filter(course_id=student.course)
+    teachers = Teachers.objects.filter(course_id=student.course_id)
     return render(
         request,
         "dash_faculty.html",
@@ -345,7 +360,7 @@ def dash_faculty(request):
 @login_required(login_url="login")
 def dash_notification(request):
     student = Students.objects.filter(user=request.user).first()
-    notifications = Notifications.objects.filter(course_id=student.course)
+    notifications = Notifications.objects.filter(course_id=student.course_id)
     return render(
         request,
         "dash_notification.html",
@@ -370,3 +385,90 @@ def dash_change_pass(request):
         user.save()
         return redirect("logout")
     return render(request, "dash_change_pass.html", {"user_profile": student})
+
+
+def teacher_dashboard(request):
+    teacher = Teachers.objects.filter(user=request.user).first()
+    subjects = Subjects.objects.filter(course_id=teacher.course_id)
+
+    current_day = datetime.now().strftime("%A")
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    day_wize_timetable = {
+        "Monday": [],
+        "Tuesday": [],
+        "Wednesday": [],
+        "Thursday": [],
+        "Friday": [],
+    }
+    for day in days:
+        for time in TimeTables.objects.filter(course_id=teacher.course_id, day=day):
+            day_wize_timetable[day].append(time)
+    return render(
+        request,
+        "teacher_time_table.html",
+        {
+            "user_profile": teacher,
+            "subjects": subjects,
+            "day_wize_timetable": day_wize_timetable,
+            "current_day": current_day,
+        },
+    )
+
+
+def td_course_students(request):
+    teacher = Teachers.objects.filter(user=request.user).first()
+    students = Students.objects.filter(course_id=teacher.course_id)
+    return render(
+        request,
+        "td_course_students.html",
+        {"user_profile": teacher, "students": students},
+    )
+
+
+def td_notification(request):
+    teacher = Teachers.objects.filter(user=request.user).first()
+    return render(
+        request,
+        "td_notification.html",
+        {
+            "user_profile": teacher,
+        },
+    )
+
+
+def td_upload_attendance(request):
+    teacher = Teachers.objects.filter(user=request.user).first()
+    return render(
+        request,
+        "td_upload_attendance.html",
+        {
+            "user_profile": teacher,
+        },
+    )
+
+
+def td_mark_attendance(request):
+    teacher = Teachers.objects.filter(user=request.user).first()
+    students = Students.objects.filter(course_id=teacher.course_id)
+    current_time = datetime.now().time()
+    today_date = datetime.today().date()
+    current_day = datetime.now().strftime("%A")
+    subjects = TimeTables.objects.filter(day=current_day, course_id=teacher.course_id)
+    current_subject = None
+    for subject in subjects:
+        if subject.time_start <= current_time <= subject.time_end:
+            current_subject = subject
+    if Attendance.objects.filter(
+        subject_id=current_subject.subject_id, date=today_date, teacher_id=teacher
+    ).first():
+        print("SDf")
+        current_subject = None
+    return render(
+        request,
+        "td_mark_attendance.html",
+        {
+            "user_profile": teacher,
+            "current_subject": current_subject,
+            "students": students,
+        },
+    )

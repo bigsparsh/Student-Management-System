@@ -34,6 +34,31 @@ urlpatterns = [
         views.dash_change_pass,
         name="dash_change_pass",
     ),
+    path(
+        "teacher_dashboard/",
+        views.teacher_dashboard,
+        name="teacher_dashboard",
+    ),
+    path(
+        "teacher_dashboard/td_course_students",
+        views.td_course_students,
+        name="td_course_students",
+    ),
+    path(
+        "teacher_dashboard/td_mark_attendance",
+        views.td_mark_attendance,
+        name="td_mark_attendance",
+    ),
+    path(
+        "teacher_dashboard/td_upload_attendance",
+        views.td_upload_attendance,
+        name="td_upload_attendance",
+    ),
+    path(
+        "teacher_dashboard/td_notification",
+        views.td_notification,
+        name="td_notification",
+    ),
     path("logout/", views.logout, name="logout"),
     path("insert/", views.insert, name="insert"),
     path("timetable_inserter/", views.timetable_inserter, name="timetable_inserter"),

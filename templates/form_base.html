@@ -67,9 +67,16 @@
 				Enter the appropriate credentials
 			</p>
 			<hr class="z-10 w-1/2 border-indigo-400 my-2" />
+			
 			{% block form %} {% endblock form %}
 		</div>
 	</div>
 </main>
+<script>
+			var box = document.getElementById("noti-dialog");
+			function closeDialog() {
+				box.close();
+			}
+		</script>
 	</body>
 </html>

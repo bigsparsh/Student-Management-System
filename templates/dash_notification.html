@@ -10,7 +10,7 @@
 	<div
 		class="list w-full px-10 text-indigo-950 font-bold flex flex-col gap-5"
 	>
-		{% for notification in notifications %}
+		{% for notification in notifications reversed %}
 		<div
 			class="notification px-5 py-3 bg-white rounded-xl shadow-xl flex flex-col gap-3"
 		>
@@ -19,7 +19,7 @@
 					class="h-[50px] aspect-square bg-center bg-cover bg-[url('{{notification.teacher_id.profile_img.url}}')] rounded-xl"
 				></div>
 				<h1 class="text-4xl font-serif tracking-tighter">
-					{{notification.teacher_id.teacher_user.username}}
+					{{notification.teacher_id.user.username}}
 				</h1>
 			</div>
 			<p class="text-lg font-normal leading-5">
