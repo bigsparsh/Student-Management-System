@@ -19,20 +19,20 @@
 				<p class="col-span-2 tracking-tighter font-serif text-4xl">
 					{{teacher.teacher_user.username}}
 				</p>
-				<p class="font-regular text-lg leading-3">Email-ID:</p>
-				<p class="font-normal text-lg leading-3">
+				<p class="font-medium text-lg leading-3 text-indigo-950/80">Email-ID:</p>
+				<p class="font-normal text-lg leading-3 text-indigo-950/80">
 					{{teacher.teacher_user.email}}
 				</p>
-				<p class="font-regular text-lg leading-3">Contact no.:</p>
-				<p class="font-normal text-lg leading-3">{{teacher.phone}}</p>
-				<p class="font-regular text-lg leading-3">Subject Name:</p>
-				<p class="font-normal text-lg leading-3">
+				<p class="font-medium text-lg leading-3 text-indigo-950/80">Contact no.:</p>
+				<p class="font-normal text-lg leading-3 text-indigo-950/80">{{teacher.phone}}</p>
+				<p class="font-medium text-lg leading-3 text-indigo-950/80">Subject Name:</p>
+				<p class="font-normal text-lg leading-3 text-indigo-950/80">
 					{{teacher.subject_id.subject_name}}
 				</p>
 			</div>
 		</div>
 		{% empty %}
-		<h1 class="p-10 text-2xl text-indigo-700">
+		<h1 class="p-10 text-2xl text-indigo-950/80">
 			No teachers in your course
 		</h1>
 		{% endfor %}

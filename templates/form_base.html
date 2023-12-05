@@ -1,4 +1,18 @@
-{% extends "base.html" %} {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<script src="//cdn.tailwindcss.com"></script>
+		<style>
+			* {
+				transition-duration: 0.5s !important;
+			}
+		</style>
+	</head>
+	<body class="overflow-x-hidden h-screen">
+		
 <main class="grid grid-cols-5 h-screen tracking-tighter overflow-hidden">
 	<div
 		class="relative text-indigo-900 sec-1 col-span-2 bg-indigo-300 gap-10 flex flex-col justify-center items-center"
@@ -57,4 +71,5 @@
 		</div>
 	</div>
 </main>
-{% endblock %}
+	</body>
+</html>
