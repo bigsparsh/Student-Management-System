@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block content %}
+<main class="grid grid-cols-5 h-screen tracking-tighter overflow-hidden">
+	<div
+		class="relative text-indigo-900 sec-1 col-span-2 bg-indigo-300 gap-10 flex flex-col justify-center items-center"
+	>
+		<h1
+			class="z-10 font-serif font-semibold italic text-5xl px-14 pt-14 text-indigo-950/80"
+		>
+			❝ Success is whole but you have to join the pieces ❞
+			<span class="text-right w-full italic italic text-xl font-light">
+				- Leah Brewer
+			</span>
+		</h1>
+		<div
+			style="
+				mask-image: linear-gradient(
+					5deg,
+					transparent 0% 20%,
+					red 20% 80%,
+					transparent 80% 100%
+				);
+				-webkit-mask-image: linear-gradient(
+					5deg,
+					transparent 0% 20%,
+					red 20% 80%,
+					transparent 80% 100%
+				);
+			"
+			class="w-full overflow-hidden h-screen opacity-30 z-index-0 grow absolute top-0 left-0"
+		>
+			<div
+				class="bg-[url('//picsum.photos/1920/1080')] bg-center bg-cover h-full w-full"
+			></div>
+		</div>
+	</div>
+	<div
+		class="sec-2 relative col-span-3 flex flex-col bg-indigo-950 items-center justify-center"
+	>
+		<div
+			class="links absolute top-0 left-0 w-full flex justify-between p-4 bg-indigo-300 border-l border-l-indigo-100"
+		>
+			{% block links %} {% endblock links %}
+		</div>
+		<div
+			class="cont h-full w-full border border-black p-20 flex flex-col items-center justify-center"
+		>
+			<h1
+				class="z-10 text-6xl text-indigo-100 font-serif font-medium tracking-tighter mb-1"
+			>
+				{% block formname %} {% endblock formname %}
+			</h1>
+			<p class="z-10 text-lg text-indigo-400 tracking-normal">
+				Enter the appropriate credentials
+			</p>
+			<hr class="z-10 w-1/2 border-indigo-400 my-2" />
+			{% block form %} {% endblock form %}
+		</div>
+	</div>
+</main>
+{% endblock %}

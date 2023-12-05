@@ -1,104 +1,65 @@
-{% extends "base.html" %} {% block content %}
-<main
-	class="grid grid-cols-5 h-screen bg-indigo-950 tracking-tighter overflow-hidden"
->
-	<div
-		class="relative text-indigo-900 sec-1 col-span-2 border-r-2 bg-indigo-400 gap-10 border-r-indigo-200 flex flex-col justify-center items-center"
+{% extends "form_base.html" %} {% block form %}
+<form action="" method="POST" class="z-10 flex flex-col w-1/2">
+	{% csrf_token %}
+	<label class="text-lg mb-1 text-indigo-300" for="email">Email-ID:</label>
+	<input
+		type="email"
+		name="email"
+		id="email"
+		class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+	/>
+	<label class="text-lg mb-1 text-indigo-300" for="password">Password:</label>
+	<input
+		type="password"
+		name="password"
+		id="password"
+		class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+	/>
+	{% for msg in messages %}
+	<dialog
+		class="w-fit tracking-tighter text-center py-5 px-10 text-3xl text-indigo-950 bg-indigo-50 mb-2 rounded-2xl tracking-normal font-medium"
+		id="noti-dialog"
+		open
 	>
-		<h1 class="z-10 font-serif font-semibold italic text-5xl px-14 pt-14">
-			❝ Success is whole but you have to join the pieces ❞
-			<span class="text-right w-full italic italic text-xl font-light">
-				- Leah Brewer
-			</span>
-		</h1>
-		<div
-			style="
-				mask-image: linear-gradient(
-					-5deg,
-					transparent 0% 20%,
-					red 20% 80%,
-					transparent 80% 100%
-				);
-				-webkit-mask-image: linear-gradient(
-					-5deg,
-					transparent 0% 20%,
-					red 20% 80%,
-					transparent 80% 100%
-				);
-			"
-			class="w-full overflow-hidden h-screen opacity-30 z-index-0 grow absolute top-0 left-0"
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			height="16"
+			width="12"
+			viewBox="0 0 384 512"
+			onclick="closeDialog();"
+			class="absolute top-2 right-4 cursor-pointer"
 		>
-			<img
-				src="//picsum.photos/1920/1280"
-				alt="LandScape"
-				class="h-full w-full"
+			<path
+				fill="#1E1B4B"
+				d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
 			/>
-		</div>
-	</div>
-	<div class="sec-2 col-span-3 flex flex-col items-center justify-center">
-		<h1
-			class="z-10 text-6xl text-indigo-100 font-medium tracking-tight mb-1"
-		>
-			Login Form
-		</h1>
-		<p class="z-10 text-lg text-indigo-400 tracking-wider">
-			Enter the appropriate credentials
-		</p>
-		<hr class="z-10 w-1/2 border-indigo-400 my-2" />
-		<form action="" method="POST" class="z-10 flex flex-col w-1/2">
-			{% csrf_token %}
-			<label class="text-lg mb-1 text-indigo-300" for="email"
-				>Email-ID:</label
-			>
-			<input
-				type="email"
-				name="email"
-				id="email"
-				class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
-			/>
-			<label class="text-lg mb-1 text-indigo-300" for="password"
-				>Password:</label
-			>
-			<input
-				type="password"
-				name="password"
-				id="password"
-				class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
-			/>
-			{% for msg in messages %}
-			<dialog
-				class="w-fit tracking-tighter text-center py-5 px-10 text-3xl text-white bg-red-500 mb-2 rounded-2xl tracking-normal font-medium"
-				id="noti-dialog"
-				open
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					height="16"
-					width="12"
-					viewBox="0 0 384 512"
-					onclick="closeDialog();"
-					class="absolute top-2 right-4 cursor-pointer"
-				>
-					<path
-						fill="#fff"
-						d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-					/>
-				</svg>
-				{{msg}}
-			</dialog>
-			{% endfor %}
-			<input
-				type="submit"
-				value="Log In using Email-ID"
-				class="bg-indigo-200 text-indigo-900 px-5 py-1 outline-none rounded-md mb-3 tracking-tighter text-2xl font-bold"
-			/>
-		</form>
-	</div>
-</main>
-<script>
-	var box = document.getElementById("noti-dialog");
-	function closeDialog() {
-		box.close();
-	}
-</script>
-{% endblock %}
+		</svg>
+		{{msg}}
+	</dialog>
+	{% endfor %}
+	<input
+		type="submit"
+		value="Log In using Email-ID"
+		class="bg-indigo-200 text-indigo-900 px-5 py-1 outline-none rounded-md mb-3 tracking-tighter text-2xl font-bold"
+	/>
+</form>
+{% endblock form %} {% block links %}
+<a
+	href="/student_signup/"
+	class="tracking-normal cursor-pointer px-3 py-1 text-lg bg-transparent border border-indigo-950 rounded-lg hover:text-indigo-50 hover:bg-indigo-950"
+>
+	Student Sign-Up
+</a>
+<a
+	href="/"
+	class="tracking-normal cursor-pointer px-3 py-1 text-lg bg-transparent border border-indigo-950 rounded-lg hover:text-indigo-50 hover:bg-indigo-950"
+>
+	Home
+</a>
+<a
+	href="/teacher_signup/"
+	class="tracking-normal cursor-pointer px-3 py-1 text-lg bg-transparent border border-indigo-950 rounded-lg hover:text-indigo-50 hover:bg-indigo-950"
+>
+	Teacher Sign-Up
+</a>
+{% endblock links %} {% block formname %} Login Form {% endblock formname %}

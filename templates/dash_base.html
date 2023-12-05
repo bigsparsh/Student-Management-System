@@ -205,5 +205,11 @@
 		<div class="right-sec h-full flex-1">
 			{% block content %} {% endblock content %}
 		</div>
+		<script>
+			var box = document.getElementById("noti-dialog");
+			function closeDialog() {
+				box.close();
+			}
+		</script>
 	</body>
 </html>
