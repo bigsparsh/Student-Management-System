@@ -112,7 +112,7 @@ class Notifications(models.Model):
 class Attendance(models.Model):
     subject_id = models.ForeignKey(Subjects, on_delete=models.CASCADE)
     student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
-    total_class = models.IntegerField(default=0)
+    total_class = models.IntegerField(default=1)
     class_taken = models.IntegerField(default=0)
     # percentage = models.IntegerField(default=0)
 

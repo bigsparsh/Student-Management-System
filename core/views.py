@@ -91,7 +91,6 @@ def dashboard(request):
     subjects = Subjects.objects.filter(course_id=student.course)
     attendance = Attendance.objects.filter(student_id=student)
     current_day = datetime.now().strftime("%A")
-    print(student.course.course_name)
     today_time_table = TimeTables.objects.filter(
         course_id=student.course, day=current_day
     )
@@ -215,7 +214,7 @@ def student_settings(request):
         user_profile.phone = phone
         user_profile.save()
 
-        return redirect("student_settings")
+        return redirect("dashboard")
     return render(request, "student_settings.html", {"user_profile": user_profile})
 
 
@@ -285,4 +284,54 @@ def timetable_inserter(request):
     courses = Courses.objects.values_list("course_name", flat=True)
     return render(
         request, "timetable_inserter.html", {"courses": courses, "subjects": subjects}
+    )
+
+
+def dash_personal_info(request):
+    student = Students.objects.filter(user=request.user).first()
+    subjects = Subjects.objects.filter(course_id=student.course)
+    # attendance = Attendance.objects.filter(student_id=student)
+    # current_day = datetime.now().strftime("%A")
+    return render(
+        request,
+        "dash_personal_info.html",
+        {"user_profile": student, "subjects": subjects},
+    )
+
+
+def dash_time_table(request):
+    student = Students.objects.filter(user=request.user).first()
+    subjects = Subjects.objects.filter(course_id=student.course)
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    day_wize_timetable = {
+        "Monday": [],
+        "Tuesday": [],
+        "Wednesday": [],
+        "Thursday": [],
+        "Friday": [],
+    }
+    for day in days:
+        for time in TimeTables.objects.filter(course_id=student.course, day=day):
+            day_wize_timetable[day].append(time)
+    return render(
+        request,
+        "dash_time_table.html",
+        {
+            "user_profile": student,
+            "subjects": subjects,
+            "day_wize_timetable": day_wize_timetable,
+        },
+    )
+
+
+def dash_faculty(request):
+    student = Students.objects.filter(user=request.user).first()
+    teachers = Teachers.objects.filter(course_id=student.course)
+    return render(
+        request,
+        "dash_faculty.html",
+        {
+            "user_profile": student,
+            "teachers": teachers,
+        },
     )

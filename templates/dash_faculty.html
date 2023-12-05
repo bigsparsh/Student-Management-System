@@ -1,0 +1,42 @@
+{% extends "dash_base.html" %} {% block content %}
+<div
+	class="bg-indigo-50 backdrop-blur-sm overflow-y-scroll pb-10 rounded-3xl w-full h-full flex flex-col text-indigo-50"
+>
+	<h1
+		class="text-4xl font-light font-serif tracking-tighter text-indigo-50 my-7 px-10 py-1 w-full bg-gradient-to-r from-indigo-950 via-indigo-950 to-transparent"
+	>
+		Your Faculty
+	</h1>
+	<div
+		class="list w-full px-10 text-indigo-950 font-bold flex flex-col gap-5"
+	>
+		{% for teacher in teachers %}
+		<div class="teacher px-5 py-3 bg-white rounded-xl shadow-xl flex gap-5">
+			<div
+				class="img bg-[url('{{teacher.profile_img.url}}')] h-[100px] w-[100px] bg-center bg-cover rounded-xl"
+			></div>
+			<div class="text-content grid grid-cols-2">
+				<p class="col-span-2 tracking-tighter font-serif text-4xl">
+					{{teacher.teacher_user.username}}
+				</p>
+				<p class="font-regular text-lg leading-3">Email-ID:</p>
+				<p class="font-normal text-lg leading-3">
+					{{teacher.teacher_user.email}}
+				</p>
+				<p class="font-regular text-lg leading-3">Contact no.:</p>
+				<p class="font-normal text-lg leading-3">{{teacher.phone}}</p>
+				<p class="font-regular text-lg leading-3">Subject Name:</p>
+				<p class="font-normal text-lg leading-3">
+					{{teacher.subject_id.subject_name}}
+				</p>
+			</div>
+		</div>
+		{% empty %}
+		<h1 class="p-10 text-2xl text-indigo-700">
+			No teachers in your course
+		</h1>
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock content %}

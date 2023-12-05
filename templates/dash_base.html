@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			* {
+				box-sizing: border-box;
+				transition-duration: 0.5s;
+				{% comment %} border: 1px solid black !important; {% endcomment %}
+			}
+			body {
+				background: linear-gradient(
+							45deg,
+							#1e1b4b 0% 35%,
+							transparent 35% 65%,
+							#1e1b4b 65% 100%
+						)
+						center / 50px 50px,
+					linear-gradient(
+							-45deg,
+							transparent 0% 47.5%,
+							#1e1b4b 47.5% 52.5%,
+							transparent 52.5% 100%
+						)
+						center / 100px 100px;
+				background-color: #0e0b2d;
+			}
+			::-webkit-scrollbar {
+				width: 5px;
+				border-radius: 10px;
+				background-color: white;
+			}
+			::-webkit-scrollbar-thumb {
+				border-radius: 10px;
+				width: 10px;
+				background-color: #1e1b4b;
+			}
+		</style>
+		<script src="//cdn.tailwindcss.com"></script>
+	</head>
+	<body class="flex gap-10 h-screen p-10">
+		<nav
+			class="bg-indigo-50 backdrop-blur h-full rounded-3xl basis-1/5 border border-indigo-50 flex flex-col items-evenly"
+		>
+			<div
+				class="profile py-2 rounded-xl flex justify-center gap-3 items-center mx-5 my-5 bg-indigo-50"
+			>
+				<img
+					src="{{user_profile.profile_img.url}}"
+					width="60"
+					height="60"
+					class="rounded-xl shadow"
+				/>
+				<h1
+					class="text-3xl font-serif font-medium tracking-tighter text-indigo-950"
+				>
+					{{user_profile.user.username}}
+					<span
+						class="block text-sm tracking-normal font-sans bg-indigo-50 text-indigo-800"
+					>
+						{{user_profile.course.course_name}}
+					</span>
+				</h1>
+			</div>
+
+			<div
+				class="menu p-5 rounded-xl flex flex-col text-xl justify-center gap-3 items-center mx-5 my-5 bg-indigo-50 font-serif"
+			>
+				<a
+					href="/dashboard/"
+					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="20"
+						width="20"
+						viewBox="0 0 576 512"
+					>
+						<path
+							fill="#1E1B4B"
+							d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"
+						/>
+					</svg>
+					Dashboard</a
+				>
+				<a
+					href="/dashboard/dash_personal_info"
+					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="20"
+						width="20"
+						viewBox="0 0 448 512"
+					>
+						<path
+							fill="#1E1B4B"
+							d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
+						/>
+					</svg>
+					Personal Info</a
+				>
+				<a
+					href="/dashboard/dash_faculty"
+					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="20"
+						width="20"
+						viewBox="0 0 448 512"
+					>
+						<path
+							fill="#1E1B4B"
+							d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"
+						/>
+					</svg>
+					Your Faculty</a
+				>
+				<a
+					href="/dashboard/dash_time_table"
+					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="20"
+						width="20"
+						viewBox="0 0 448 512"
+					>
+						<path
+							fill="#1E1B4B"
+							d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z"
+						/>
+					</svg>
+					Time Table</a
+				>
+				<a
+					href="#"
+					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="20"
+						width="20"
+						viewBox="0 0 448 512"
+					>
+						<path
+							fill="#1E1B4B"
+							d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"
+						/>
+					</svg>
+					Notifications</a
+				>
+				<a
+					href="#"
+					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="20"
+						width="20"
+						viewBox="0 0 512 512"
+					>
+						<path
+							fill="#1E1B4B"
+							d="M336 352c97.2 0 176-78.8 176-176S433.2 0 336 0S160 78.8 160 176c0 18.7 2.9 36.8 8.3 53.7L7 391c-4.5 4.5-7 10.6-7 17v80c0 13.3 10.7 24 24 24h80c13.3 0 24-10.7 24-24V448h40c13.3 0 24-10.7 24-24V384h40c6.4 0 12.5-2.5 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zM376 96a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"
+						/>
+					</svg>
+					Change Password</a
+				>
+				<a
+					href="/student_settings/"
+					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="20"
+						width="20"
+						viewBox="0 0 512 512"
+					>
+						<path
+							fill="#1E1B4B"
+							d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"
+						/>
+					</svg>
+					Settings</a
+				>
+				<a
+					href="/logout/"
+					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						height="20"
+						width="20"
+						viewBox="0 0 512 512"
+					>
+						<path
+							fill="#1E1B4B"
+							d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
+						/>
+					</svg>
+					Logout
+				</a>
+			</div>
+		</nav>
+		<div class="right-sec h-full flex-1">
+			{% block content %} {% endblock content %}
+		</div>
+	</body>
+</html>
