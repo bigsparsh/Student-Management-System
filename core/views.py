@@ -475,9 +475,26 @@ def td_mark_attendance(request):
             subject_id=current_subject.subject_id, date=today_date, teacher_id=teacher
         ).first():
             current_subject = None
-
     if request.method == "POST":
-        print(request.POST)
+        students_present = []
+        all_students = Students.objects.filter(course_id=teacher.course_id)
+        for ele in request.POST.keys():
+            if request.POST[ele] == "on":
+                students_present.append(ele)
+        for student in all_students:
+            stud = Students.objects.filter(student_id=student.student_id).first()
+            stud_att = Attendance.objects.filter(
+                student_id=stud, subject_id=current_subject.subject_id
+            ).first()
+            if str(student.student_id) in students_present:
+                stud_att.class_taken += 1
+            stud_att.teacher_id = teacher
+            stud_att.date = datetime.today().date()
+            stud_att.time = datetime.now().time()
+            stud_att.total_class += 1
+            stud_att.save()
+            return redirect("td_mark_attendance")
+
     return render(
         request,
         "td_mark_attendance.html",
