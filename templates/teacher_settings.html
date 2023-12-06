@@ -1,48 +1,38 @@
-{% extends "base.html" %} {% block content %}
-<div class="container w-screen h-full bg-indigo-950 p-20">
-	<img
-		src="{{user_profile.profile_img.url}}"
-		alt="Profile"
-		width="100"
-		class="absolute top-50 left-1/4 rounded-xl"
-	/>
-	<div
-		class="inner-container bg-indigo-200 w-1/3 h-full rounded-xl justify-start items-center shadow-2xl m-auto p-10 flex flex-col"
+{% extends "teacher_dash_base.html" %} {% block content %}
+<div
+	class="bg-indigo-50 backdrop-blur-sm overflow-y-scroll pb-10 rounded-3xl w-full h-full flex flex-col text-indigo-50"
+>
+	<h1
+		class="text-4xl font-light font-serif tracking-tighter text-indigo-50 my-7 px-10 py-1 w-full bg-gradient-to-r from-indigo-950 via-indigo-950 to-transparent"
 	>
-		<h1 class="text-5xl text-indigo-950 font-bold tracking-tight">
-			Teacher Settings
-		</h1>
-		<p class="text-lg text-indigo-500 tracking-tight">
-			Welcome {{user_profile.teacher_user.username}}
-		</p>
-		<hr />
-
-		<form
+		Teacher Settings
+	</h1>
+	<form
 			action=""
 			method="POST"
 			enctype="multipart/form-data"
-			class="flex flex-col w-full text-lg text-indigo-950 pt-5 mt-2 border-t border-t-indigo-700"
+			class="p-10 rounded-3xl shadow-xl bg-white self-center text-indigo-950 flex flex-col gap-2 w-1/2"
 		>
 			{% csrf_token %}
-			<label for="profile" class="pt-2 font-semibold">
+			<label for="profile" class="text-xl tracking-tighter font-serif">
 				Profile Image:
 			</label>
 			<input
 				type="file"
 				name="image"
-				class="text-md bg-indigo-100 w-full rounded-lg overflow-hidden px-3 py-1 text-indigo-950"
+				class="text-indigo-950/70 rounded-md mb-3 bg-indigo-100/10 shadow-inner border-b px-5 py-1 border-indigo-950"
 			/>
 
-			<label for="address" class="pt-2 font-semibold"> Address: </label>
+			<label for="address" class="text-xl tracking-tighter font-serif"> Address: </label>
 			<input
 				type="text"
 				name="address"
 				id="address"
 				value="{{user_profile.address}}"
-				class="text-md bg-indigo-100 w-full rounded-lg overflow-hidden px-3 py-1 text-indigo-950"
+				class="text-indigo-950/70 rounded-md mb-3 bg-indigo-100/10 shadow-inner border-b px-5 py-1 border-indigo-950"
 			/>
 
-			<label for="phone" class="pt-2 font-semibold"
+			<label for="phone" class="text-xl tracking-tighter font-serif"
 				>Your Mobile number:
 			</label>
 			<input
@@ -50,9 +40,9 @@
 				name="phone"
 				value="{{user_profile.phone}}"
 				id="phone"
-				class="text-md bg-indigo-100 w-full rounded-lg overflow-hidden px-3 py-1 text-indigo-950"
+				class="text-indigo-950/70 rounded-md mb-3 bg-indigo-100/10 shadow-inner border-b px-5 py-1 border-indigo-950"
 			/>
-			<label class="pt-2 font-semibold" for="password2"
+			<label class="text-xl tracking-tighter font-serif" for="password2"
 				>Which subject will you teach in
 				{{user_profile.course_id.course_name}} course?:</label
 			>
@@ -60,7 +50,7 @@
 				name="subject"
 				id="subject"
 				selected="4"
-				class="text-md bg-indigo-100 w-full rounded-lg overflow-hidden px-3 py-1 text-indigo-950"
+				class="text-indigo-950/70 rounded-md mb-3 bg-indigo-100/10 shadow-inner border-b px-5 py-1 border-indigo-950"
 			>
 				{% for subject in subjects %}
 				<option
@@ -76,9 +66,9 @@
 			<input
 				type="submit"
 				value="Update my Profile"
-				class="text-indigo-200 mt-3 bg-indigo-950 hover:shadow-lg px-5 py-1 outline-none rounded-md mb-3 tracking-tighter text-2xl font-bold"
+				class="tracking-tighter font-medium hover:text-indigo-50 cursor-pointer hover:bg-indigo-950 text-xl px-5 py-2 border-indigo-950 border w-fit self-center rounded-xl"
 			/>
 		</form>
-	</div>
 </div>
-{% endblock %}
+
+{% endblock content %}

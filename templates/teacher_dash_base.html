@@ -41,28 +41,28 @@
 		<script src="//cdn.tailwindcss.com"></script>
 	</head>
 	<body class="flex gap-10 h-screen p-10">
-	{% for msg in messages %}
-	<dialog
-		class="w-fit tracking-tighter text-center py-5 px-10 text-3xl text-indigo-950 bg-indigo-50 mb-2 rounded-2xl tracking-normal font-medium"
-		id="noti-dialog"
-		open
-	>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			height="16"
-			width="12"
-			viewBox="0 0 384 512"
-			onclick="closeDialog();"
-			class="absolute top-2 right-4 cursor-pointer"
+		{% for msg in messages %}
+		<dialog
+			class="w-fit tracking-tighter text-center py-5 px-10 text-3xl text-indigo-950 bg-indigo-50 mb-2 rounded-2xl tracking-normal font-medium"
+			id="noti-dialog"
+			open
 		>
-			<path
-				fill="#1E1B4B"
-				d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
-			/>
-		</svg>
-		{{msg}}
-	</dialog>
-	{% endfor %}
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				height="16"
+				width="12"
+				viewBox="0 0 384 512"
+				onclick="closeDialog();"
+				class="absolute top-2 right-4 cursor-pointer"
+			>
+				<path
+					fill="#1E1B4B"
+					d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"
+				/>
+			</svg>
+			{{msg}}
+		</dialog>
+		{% endfor %}
 		<nav
 			class="bg-indigo-50 backdrop-blur h-full rounded-3xl basis-1/5 border border-indigo-50 flex flex-col items-evenly"
 		>
@@ -122,7 +122,7 @@
 					Course Students</a
 				>
 				<a
-					href="/teacher_dashboard/td_upload_attendance"
+					href="/teacher_dashboard/td_update_attendance"
 					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
 				>
 					<svg
@@ -173,7 +173,7 @@
 					Notifications</a
 				>
 				<a
-					href="/dashboard/td_change_pass"
+					href="/teacher_dashboard/td_change_pass"
 					class="flex gap-3 items-center border-b border-indigo-800 pb-2 w-full relative after:content-[''] after:absolute after:bottom-0 after:duration-700 text-indigo-950 hover:after:w-full after:h-1 after:bg-indigo-950 after:rounded-full after:left-0 after:w-0"
 				>
 					<svg

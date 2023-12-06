@@ -8,39 +8,58 @@
 		Mark Attendance of {{current_subject.subject_id.subject_name}}
 	</h1>
 	{% if current_subject is not None %}
-	<table
-		class="text-indigo-950 self-center px-10 text-center rounded-2xl shadow-2xl overflow-hidden bg-white"
-	>
-		<tr>
-			<th class="px-5 py-3 bg-indigo-950 text-indigo-50">Student-ID</th>
-			<th class="px-5 py-3 bg-indigo-950 text-indigo-50">Student Name</th>
-			<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
-				Father's Name
-			</th>
-			<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
-				Mother's Name
-			</th>
-			<th class="px-5 py-3 bg-indigo-950 text-indigo-50">Attendance</th>
-		</tr>
-		{% for student in students %}
-		<tr>
-			<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
-				{{student.student_id}}
-			</th>
-			<td class="px-5 py-3">{{student.user.username}}</td>
-			<td class="px-5 py-3">{{student.father_name}}</td>
-			<td class="px-5 py-3">{{student.mother_name}}</td>
-			<td class="px-5 py-3r">
-				<input
-					type="checkbox"
-					class="accent-indigo-950 scale-150"
-					id="{{student.student_id}}"
-					name="{{student.student_id}}"
-				/>
-			</td>
-		</tr>
-		{% endfor %}
-	</table>
+	<form action="" method="POST" class="h-full self-center">
+		{% csrf_token %}
+		<table
+			class="text-indigo-950 self-center px-10 text-center rounded-2xl shadow-2xl overflow-hidden bg-white"
+		>
+			<tr>
+				<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
+					Student-ID
+				</th>
+				<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
+					Student Name
+				</th>
+				<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
+					Father's Name
+				</th>
+				<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
+					Mother's Name
+				</th>
+				<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
+					Attendance
+				</th>
+			</tr>
+			{% for student in students %}
+			<tr>
+				<th class="px-5 py-3 bg-indigo-950 text-indigo-50">
+					{{student.student_id}}
+				</th>
+				<td class="px-5 py-3">{{student.user.username}}</td>
+				<td class="px-5 py-3">{{student.father_name}}</td>
+				<td class="px-5 py-3">{{student.mother_name}}</td>
+				<td class="px-5 py-3r">
+					<input
+						type="checkbox"
+						class="accent-indigo-950 scale-150"
+						id="{{student.student_id}}"
+						name="{{student.student_id}}"
+					/>
+				</td>
+			</tr>
+			{% endfor %}
+			<tr>
+				<td colspan="5">
+					<input
+						type="submit"
+						value="Submit Attendance"
+						class="rounded-b-xl w-full tracking-tighter text-indigo-950 font-medium hover:text-indigo-50 cursor-pointer hover:bg-indigo-950 text-xl px-5 py-2 border-indigo-950 border w-fit self-center"
+					/>
+				</td>
+			</tr>
+		</table>
+	</form>
+
 	{% else %}
 	<h1 class="p-10 text-2xl text-indigo-950/80">
 		Either attendance has been marked or no class to teach at this hour.

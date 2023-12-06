@@ -50,14 +50,19 @@ urlpatterns = [
         name="td_mark_attendance",
     ),
     path(
-        "teacher_dashboard/td_upload_attendance",
-        views.td_upload_attendance,
-        name="td_upload_attendance",
+        "teacher_dashboard/td_update_attendance",
+        views.td_update_attendance,
+        name="td_update_attendance",
     ),
     path(
         "teacher_dashboard/td_notification",
         views.td_notification,
         name="td_notification",
+    ),
+    path(
+        "teacher_dashboard/td_change_pass",
+        views.td_change_pass,
+        name="td_change_pass",
     ),
     path("logout/", views.logout, name="logout"),
     path("insert/", views.insert, name="insert"),

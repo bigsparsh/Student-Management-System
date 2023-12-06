@@ -427,20 +427,32 @@ def td_course_students(request):
 
 def td_notification(request):
     teacher = Teachers.objects.filter(user=request.user).first()
+    notifications = Notifications.objects.filter(teacher_id=teacher)
+    if request.method == "POST":
+        msg = request.POST["msg"]
+        new_noti = Notifications.objects.create(
+            message=msg,
+            course_id=teacher.course_id,
+            teacher_id=teacher,
+            date=datetime.now(),
+        )
+        new_noti.save()
     return render(
         request,
         "td_notification.html",
         {
             "user_profile": teacher,
+            "notifications": notifications,
         },
     )
 
 
-def td_upload_attendance(request):
+def td_update_attendance(request):
     teacher = Teachers.objects.filter(user=request.user).first()
+
     return render(
         request,
-        "td_upload_attendance.html",
+        "td_update_attendance.html",
         {
             "user_profile": teacher,
         },
@@ -458,11 +470,14 @@ def td_mark_attendance(request):
     for subject in subjects:
         if subject.time_start <= current_time <= subject.time_end:
             current_subject = subject
-    if Attendance.objects.filter(
-        subject_id=current_subject.subject_id, date=today_date, teacher_id=teacher
-    ).first():
-        print("SDf")
-        current_subject = None
+    if current_day:
+        if Attendance.objects.filter(
+            subject_id=current_subject.subject_id, date=today_date, teacher_id=teacher
+        ).first():
+            current_subject = None
+
+    if request.method == "POST":
+        print(request.POST)
     return render(
         request,
         "td_mark_attendance.html",
@@ -472,3 +487,18 @@ def td_mark_attendance(request):
             "students": students,
         },
     )
+
+
+def td_change_pass(request):
+    teacher = Teachers.objects.filter(user=request.user).first()
+    if request.method == "POST":
+        old_password = request.POST.get("old_password")
+        new_password = request.POST.get("new_password")
+        user = teacher.user
+        if not user.check_password(old_password):
+            print("Old password is incorrect")
+            return redirect("td_change_pass")
+        user.set_password(new_password)
+        user.save()
+        return redirect("logout")
+    return render(request, "td_change_pass.html", {"user_profile": teacher})
