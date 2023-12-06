@@ -50,11 +50,6 @@ urlpatterns = [
         name="td_mark_attendance",
     ),
     path(
-        "teacher_dashboard/td_update_attendance",
-        views.td_update_attendance,
-        name="td_update_attendance",
-    ),
-    path(
         "teacher_dashboard/td_notification",
         views.td_notification,
         name="td_notification",

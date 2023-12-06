@@ -24,7 +24,10 @@ def login(request):
 
         if user is not None and user.check_password(password):
             auth.login(request, user)
-            return redirect("home")
+            if Teachers.objects.filter(user=user).first():
+                return redirect("teacher_dashboard")
+            else:
+                return redirect("dashboard")
         else:
             messages.info(request, "Credentials Invalid")
             return redirect("login")
@@ -447,17 +450,6 @@ def td_notification(request):
     )
 
 
-def td_update_attendance(request):
-    teacher = Teachers.objects.filter(user=request.user).first()
-
-    return render(
-        request,
-        "td_update_attendance.html",
-        {
-            "user_profile": teacher,
-        },
-    )
-
 
 def td_mark_attendance(request):
     teacher = Teachers.objects.filter(user=request.user).first()
@@ -470,12 +462,12 @@ def td_mark_attendance(request):
     for subject in subjects:
         if subject.time_start <= current_time <= subject.time_end:
             current_subject = subject
-    if current_day:
+    if current_subject is not None:
         if Attendance.objects.filter(
             subject_id=current_subject.subject_id, date=today_date, teacher_id=teacher
         ).first():
             current_subject = None
-    if request.method == "POST":
+    if request.method == "POST" and current_subject:
         students_present = []
         all_students = Students.objects.filter(course_id=teacher.course_id)
         for ele in request.POST.keys():

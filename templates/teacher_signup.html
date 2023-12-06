@@ -1,59 +1,52 @@
-{% extends "form_base.html" %}
-{% block formname %}
-Teacher Sign-Up
-{% endblock formname %}
-{% block form %}
+{% extends "form_base.html" %} {% block formname %} Teacher Sign-Up {% endblock
+formname %} {% block form %}
 <form action="" method="POST" class="z-10 flex flex-col w-1/2 text-indigo-50">
-			{% csrf_token %}
-			<label class="text-lg mb-1 text-indigo-300" for="username"
-				>Full Name:</label
-			>
-			<input
-				type="text"
-				name="username"
-				id="username"
-				class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
-			/>
-			<label class="text-lg mb-1 text-indigo-300" for="email"
-				>Email-ID:</label
-			>
-			<input
-				type="email"
-				name="email"
-				id="email"
-				class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
-			/>
-			<label class="text-lg mb-1 text-indigo-300" for="password"
-				>Password:</label
-			>
-			<input
-				type="password"
-				name="password"
-				id="password"
-				class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
-			/>
-			<label class="text-lg mb-1 text-indigo-300" for="password2"
-				>Password:</label
-			>
-			<input
-				type="password"
-				name="password2"
-				id="password2"
-				class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
-			/>
-			<label class="text-lg mb-1 text-indigo-300" for="password2"
-				>Which course are you willing to teach?:</label
-			>
-			<select
-				name="course"
-				id="course"
-				class="border bg-indigo-950 border-indigo-200 text-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
-			>
-				{% for course in courses %}
-				<option value="{{ course }}">{{ course }}</option>
-				{% endfor %}
-			</select>
-			{% for msg in messages %}
+	{% csrf_token %}
+	<label class="text-lg mb-1 text-indigo-300" for="username"
+		>Full Name:</label
+	>
+	<input
+		type="text"
+		name="username"
+		id="username"
+		class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+	/>
+	<label class="text-lg mb-1 text-indigo-300" for="email">Email-ID:</label>
+	<input
+		type="email"
+		name="email"
+		id="email"
+		class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+	/>
+	<label class="text-lg mb-1 text-indigo-300" for="password">Password:</label>
+	<input
+		type="password"
+		name="password"
+		id="password"
+		class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+	/>
+	<label class="text-lg mb-1 text-indigo-300" for="password2"
+		>Password:</label
+	>
+	<input
+		type="password"
+		name="password2"
+		id="password2"
+		class="border bg-transparent border-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+	/>
+	<label class="text-lg mb-1 text-indigo-300" for="password2"
+		>Which course are you willing to teach?:</label
+	>
+	<select
+		name="course"
+		id="course"
+		class="border bg-indigo-950 border-indigo-200 text-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+	>
+		{% for course in courses %}
+		<option value="{{ course }}">{{ course }}</option>
+		{% endfor %}
+	</select>
+	{% for msg in messages %}
 	<dialog
 		class="w-fit tracking-tighter text-center py-5 px-10 text-3xl text-indigo-950 bg-indigo-50 mb-2 rounded-2xl tracking-normal font-medium"
 		id="noti-dialog"
@@ -75,25 +68,18 @@ Teacher Sign-Up
 		{{msg}}
 	</dialog>
 	{% endfor %}
-			<input
-				type="submit"
-				value="Sign Up using Email-ID"
-				class="bg-indigo-200 text-indigo-900 px-5 py-1 outline-none rounded-md mb-3 tracking-tighter text-2xl font-bold"
-			/>
-		</form>
-{% endblock form %}
-{% block links %}
+	<input
+		type="submit"
+		value="Sign Up using Email-ID"
+		class="bg-indigo-200 text-indigo-900 px-5 py-1 outline-none rounded-md mb-3 tracking-tighter text-2xl font-bold"
+	/>
+</form>
+{% endblock form %} {% block links %}
 <a
 	href="/login/"
 	class="tracking-normal cursor-pointer px-3 py-1 text-lg bg-transparent border border-indigo-950 rounded-lg hover:text-indigo-50 hover:bg-indigo-950"
 >
 	Login
-</a>
-<a
-	href="/"
-	class="tracking-normal cursor-pointer px-3 py-1 text-lg bg-transparent border border-indigo-950 rounded-lg hover:text-indigo-50 hover:bg-indigo-950"
->
-	Home
 </a>
 <a
 	href="/student_signup/"

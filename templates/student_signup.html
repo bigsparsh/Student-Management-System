@@ -1,6 +1,4 @@
-{% extends "form_base.html" %} 
-{% block formname %} Student Sign-Up {% endblock formname %} 
-{% block form %}
+{% extends "form_base.html" %} {% block form %}
 
 <form action="" method="POST" class="z-10 flex flex-col w-1/2">
 	{% csrf_token %}
@@ -12,6 +10,7 @@
 		name="username"
 		id="username"
 		class="border bg-indigo-950 border-indigo-200 text-indigo-200 accent-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+		required
 	/>
 	<label class="text-lg mb-1 text-indigo-300" for="email">Email-ID:</label>
 	<input
@@ -19,6 +18,7 @@
 		name="email"
 		id="email"
 		class="border bg-indigo-950 border-indigo-200 text-indigo-200 accent-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+		required
 	/>
 	<label for="dob" class="text-lg mb-1 text-indigo-300"
 		>Date of Birth:
@@ -29,6 +29,7 @@
 		name="dob"
 		id="dob"
 		class="border bg-indigo-950 border-indigo-200 text-indigo-200 accent-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+		required
 	/>
 	<label class="text-lg mb-1 text-indigo-300" for="password">Password:</label>
 	<input
@@ -36,15 +37,17 @@
 		name="password"
 		id="password"
 		class="border bg-indigo-950 border-indigo-200 text-indigo-200 accent-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+		required
 	/>
 	<label class="text-lg mb-1 text-indigo-300" for="password2"
-		>Password:</label
+		>Confirm Password:</label
 	>
 	<input
 		type="password"
 		name="password2"
 		id="password2"
 		class="border bg-indigo-950 border-indigo-200 text-indigo-200 accent-indigo-200 px-5 py-1 outline-none rounded-md mb-3"
+		required
 	/>
 	<label class="text-lg mb-1 text-indigo-300" for="password2"
 		>Which course are you enrolling for?:</label
@@ -94,16 +97,10 @@
 	Login
 </a>
 <a
-	href="/"
-	class="tracking-normal cursor-pointer px-3 py-1 text-lg bg-transparent border border-indigo-950 rounded-lg hover:text-indigo-50 hover:bg-indigo-950"
->
-	Home
-</a>
-<a
 	href="/teacher_signup/"
 	class="tracking-normal cursor-pointer px-3 py-1 text-lg bg-transparent border border-indigo-950 rounded-lg hover:text-indigo-50 hover:bg-indigo-950"
 >
 	Teacher Sign-Up
 </a>
 
-{% endblock links %}
+{% endblock links %} {%block formname%}Student Sign-Up{%endblock formname%}
